@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Simple setInterval clock</title>
+    <style>
+      body {
+        text-align: center;
+        margin-top: 100px;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>StopWatch</h1>
+    <h1 class="clock"></h1>
+    <button class="start">Start</button>
+    <button class="stop">Stop</button>
+    <button class="reset">Reset</button>
+
+    <script>
+      // set counter for seconds, minutes, and hours
+      let counter1 = 0;
+      let counter2 = 0;
+      let counter3 = 0;
+
+      // Function that sets the counter values
+      function setStopWatch() {
+        document.querySelector('.clock').textContent = counter3 + ' : ' + counter2 + ' : ' + counter1 
+        
+          counter1 += 1;
+        
+        if(counter1 === 60) {
+          counter1 = 0;
+          counter2 += 1;
+        }
+        if (counter2 === 60) {
+          counter2 = 0;
+          counter3 += 1;
+        }
+
+      }
+      setStopWatch()
+      
+      // Select the start button and and calls the setStopwatch function every one seconds
+      let startBtn = document.querySelector('.start');
+      startBtn.addEventListener('click', ()=> {
+       setInt = setInterval(setStopWatch, 1000)
+       startBtn.disabled = true;
+      });
+
+      // Selects the Stop button, enable the Start button and pause the counter
+      let stop = document.querySelector('.stop');
+      stop.addEventListener('click', ()=> {
+        startBtn.disabled = false;
+        clearInterval(setInt)
+      })
+
+      // Selects the Reset button, enable the Start button and clear the counter to reseting all values
+      let reset = document.querySelector('.reset');
+      reset.addEventListener('click', () => {
+        clearInterval(setInt)
+        startBtn.disabled = false;
+        counter1 = 0;
+        counter2 = 0;
+        counter3 = 0;
+        document.querySelector('.clock').textContent = counter3 + ' : ' + counter2 + ' : ' + counter1 
+      })
+
+
+
+    </script>
+  </body>
+</html>
